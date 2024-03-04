@@ -1,10 +1,12 @@
 from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.routers import DefaultRouter
 from . import views
 
-urlpatterns = [
-    path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
-]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+app_name = 'api'
+
+
+router = DefaultRouter()
+
+router.register('todolists', views.TodoList, basename='todolist')
+urlpatterns = router.urls
